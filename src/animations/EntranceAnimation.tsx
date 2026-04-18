@@ -1,43 +1,84 @@
-import React from 'react';
-import { MotiView, MotiText } from 'moti';
+import React, { useMemo } from 'react';
+import { MotiView } from 'moti';
 
 interface Props {
   children: React.ReactNode;
   delay?: number;
-  type?: 'fade' | 'slide' | 'zoom';
+  duration?: number;
+  type?: 'fade' | 'slide' | 'zoom' | 'bounce';
+  direction?: 'up' | 'down' | 'left' | 'right';
+  distance?: number;
+  scale?: number;
 }
 
 export default function EntranceAnimation({ 
   children, 
   delay = 0, 
-  type = 'slide'
+  duration = 800,
+  type = 'slide',
+  direction = 'up',
+  distance = 50,
+  scale = 0.8
 }: Props) {
-  const getInitialState = () => {
-    switch (type) {
-      case 'zoom': return { opacity: 0, scale: 0.5 };
-      case 'fade': return { opacity: 0 };
-      default: return { opacity: 0, translateY: 30 };
-    }
-  };
+  
+  const from = useMemo(() => {
+    const transform: any[] = [];
+    
+    let initialScale = 1;
+    if (type === 'zoom') initialScale = scale;
+    if (type === 'bounce') initialScale = 0.3;
+    transform.push({ scale: initialScale });
 
-  const getAnimateState = () => {
-    switch (type) {
-      case 'zoom': return { opacity: 1, scale: 1 };
-      case 'fade': return { opacity: 1 };
-      default: return { opacity: 1, translateY: 0 };
+    let translateX = 0;
+    let translateY = 0;
+
+    if (type === 'slide' || type === 'bounce' || type === 'zoom') {
+      switch (direction) {
+        case 'up': translateY = distance; break;
+        case 'down': translateY = -distance; break;
+        case 'left': translateX = distance; break;
+        case 'right': translateX = -distance; break;
+      }
     }
-  };
+    transform.push({ translateX });
+    transform.push({ translateY });
+
+    return {
+      opacity: 0,
+      transform,
+    };
+  }, [type, direction, distance, scale]);
+
+  const animate = useMemo(() => ({
+    opacity: 1,
+    transform: [
+      { scale: 1 },
+      { translateX: 0 },
+      { translateY: 0 },
+    ],
+  }), []);
+
+  const transition: any = useMemo(() => {
+    if (type === 'bounce') {
+      return {
+        type: 'spring',
+        damping: 12,
+        stiffness: 90,
+        delay,
+      };
+    }
+    return {
+      type: 'timing',
+      duration,
+      delay,
+    };
+  }, [type, delay, duration]);
 
   return (
     <MotiView
-      from={getInitialState()}
-      animate={getAnimateState()}
-      transition={{
-        type: 'spring',
-        damping: 15,
-        stiffness: 100,
-        delay,
-      }}
+      from={from}
+      animate={animate}
+      transition={transition}
     >
       {children}
     </MotiView>
