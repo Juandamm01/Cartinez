@@ -63,11 +63,18 @@ export default function WelcomeScreen({ navigation }: WelcomeScreenProps) {
                 </Animated.View>
               </View>
 
-              <Animated.View style={[
-                styles.footer,
-                { opacity: buttonsOpacity, transform: [{ translateY: buttonsTranslateY }] }
-              ]}>
-                <TouchableOpacity style={styles.btnPrimary} activeOpacity={0.8}>
+              <Animated.View 
+                pointerEvents="auto"
+                style={[
+                  styles.footer,
+                  { opacity: buttonsOpacity, transform: [{ translateY: buttonsTranslateY }] }
+                ]}
+              >
+                <TouchableOpacity 
+                  style={styles.btnPrimary} 
+                  activeOpacity={0.8}
+                  onPress={() => navigation.navigate('Register')}
+                >
                   <Text style={styles.btnTextWhite}>Registrarse</Text>
                   <Ionicons name="arrow-forward" size={20} color="white" style={styles.arrowIcon} />
                 </TouchableOpacity>
