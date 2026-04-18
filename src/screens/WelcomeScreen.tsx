@@ -46,7 +46,6 @@ export default function WelcomeScreen({ navigation }: WelcomeScreenProps) {
           <SafeAreaView style={styles.safeArea}>
             <View style={styles.content}>
               
-              {/* Top Section - More Compact */}
               <View style={styles.header}>
                 <Animated.View style={{ transform: [{ scale: logoScale }] }}>
                   <Image 
@@ -56,7 +55,6 @@ export default function WelcomeScreen({ navigation }: WelcomeScreenProps) {
                   />
                 </Animated.View>
 
-                {/* Quote Section - Much higher now */}
                 <Animated.View style={[styles.quoteGlass, { opacity: quoteOpacity }]}>
                   <View style={styles.orangeBar} />
                   <Text style={styles.quoteText}>
@@ -65,8 +63,10 @@ export default function WelcomeScreen({ navigation }: WelcomeScreenProps) {
                 </Animated.View>
               </View>
 
-              {/* Action Buttons Section - Simplified */}
-              <View style={styles.footer}>
+              <Animated.View style={[
+                styles.footer,
+                { opacity: buttonsOpacity, transform: [{ translateY: buttonsTranslateY }] }
+              ]}>
                 <TouchableOpacity style={styles.btnPrimary} activeOpacity={0.8}>
                   <Text style={styles.btnTextWhite}>Registrarse</Text>
                   <Ionicons name="arrow-forward" size={20} color="white" style={styles.arrowIcon} />
@@ -74,7 +74,7 @@ export default function WelcomeScreen({ navigation }: WelcomeScreenProps) {
 
                 <TouchableOpacity 
                   style={styles.btnOutline} 
-                  activeOpacity={0.5}
+                  activeOpacity={0.7}
                   onPress={() => {
                     console.log('Navegando a Login...');
                     navigation.navigate('Login');
@@ -102,7 +102,7 @@ export default function WelcomeScreen({ navigation }: WelcomeScreenProps) {
                 <Text style={styles.footerLegal}>
                   Cartinez · Villavicencio Conectado
                 </Text>
-              </View>
+              </Animated.View>
 
             </View>
           </SafeAreaView>
