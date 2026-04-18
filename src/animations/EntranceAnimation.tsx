@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { MotiView } from 'moti';
 
 interface Props {
@@ -21,64 +21,45 @@ export default function EntranceAnimation({
   scale = 0.8
 }: Props) {
   
-  const from = useMemo(() => {
-    const transform: any[] = [];
-    
-    let initialScale = 1;
-    if (type === 'zoom') initialScale = scale;
-    if (type === 'bounce') initialScale = 0.3;
-    transform.push({ scale: initialScale });
+  const getInitial = () => {
+    'worklet';
+    let tx = 0;
+    let ty = 0;
+    let s = 1;
 
-    let translateX = 0;
-    let translateY = 0;
+    if (type === 'zoom') s = scale;
+    if (type === 'bounce') s = 0.3;
 
     if (type === 'slide' || type === 'bounce' || type === 'zoom') {
-      switch (direction) {
-        case 'up': translateY = distance; break;
-        case 'down': translateY = -distance; break;
-        case 'left': translateX = distance; break;
-        case 'right': translateX = -distance; break;
-      }
+      if (direction === 'up') ty = distance;
+      else if (direction === 'down') ty = -distance;
+      else if (direction === 'left') tx = distance;
+      else if (direction === 'right') tx = -distance;
     }
-    transform.push({ translateX });
-    transform.push({ translateY });
 
     return {
       opacity: 0,
-      transform,
+      scale: s,
+      translateX: tx,
+      translateY: ty
     };
-  }, [type, direction, distance, scale]);
-
-  const animate = useMemo(() => ({
-    opacity: 1,
-    transform: [
-      { scale: 1 },
-      { translateX: 0 },
-      { translateY: 0 },
-    ],
-  }), []);
-
-  const transition: any = useMemo(() => {
-    if (type === 'bounce') {
-      return {
-        type: 'spring',
-        damping: 12,
-        stiffness: 90,
-        delay,
-      };
-    }
-    return {
-      type: 'timing',
-      duration,
-      delay,
-    };
-  }, [type, delay, duration]);
+  };
 
   return (
     <MotiView
-      from={from}
-      animate={animate}
-      transition={transition}
+      from={getInitial()}
+      animate={{
+        opacity: 1,
+        scale: 1,
+        translateX: 0,
+        translateY: 0,
+      }}
+      transition={{
+        type: type === 'bounce' ? 'spring' : 'timing',
+        duration: duration,
+        delay: delay,
+      }}
+      style={{ width: '100%', alignItems: 'center' }}
     >
       {children}
     </MotiView>
