@@ -19,75 +19,74 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   card: {
-    width: '100%',
-    backgroundColor: 'rgba(245, 245, 235, 0.92)', // Crema suave como el mockup
-    borderRadius: 40,
-    padding: 30,
+    width: '94%',
+    backgroundColor: 'rgba(245, 245, 235, 0.94)', 
+    borderRadius: 35,
+    padding: 20, // Reducido de 25
     alignItems: 'center',
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 15 },
-    shadowOpacity: 0.3,
-    shadowRadius: 20,
-    elevation: 10,
+    shadowOffset: { width: 0, height: 12 },
+    shadowOpacity: 0.25,
+    shadowRadius: 15,
+    elevation: 8,
   },
   logoContainer: {
     alignItems: 'center',
-    marginBottom: 25,
-  },
-  logoText: {
-    fontSize: 42,
-    fontWeight: '900',
-    color: '#8B4513', // Marrón oscuro
-    fontStyle: 'italic',
-    letterSpacing: -1,
-  },
-  logoSubtitle: {
-    fontSize: 12,
-    color: '#5D4037',
-    fontWeight: '700',
-    letterSpacing: 1.5,
+    marginBottom: 10, // Reducido de 20
     marginTop: -5,
   },
+  logoImage: {
+    width: width * 0.35, // Reducido de 0.45
+    height: width * 0.35, // Reducido de 0.45
+  },
+  logoSubtitle: {
+    fontSize: 9, // Reducido de 10
+    color: '#5D4037',
+    fontWeight: '800',
+    letterSpacing: 2,
+    marginTop: -12,
+    textAlign: 'center',
+  },
   title: {
-    fontSize: 26,
+    fontSize: 22, // Reducido de 26
     fontWeight: '800',
     color: '#1A1A1A',
-    marginBottom: 8,
+    marginBottom: 4, // Reducido de 8
     alignSelf: 'flex-start',
   },
   subtitle: {
-    fontSize: 14,
+    fontSize: 13, // Reducido de 14
     color: '#666',
-    marginBottom: 25,
-    lineHeight: 20,
+    marginBottom: 15, // Reducido de 25
+    lineHeight: 18,
     alignSelf: 'flex-start',
   },
   inputGroup: {
     width: '100%',
-    marginBottom: 15,
+    marginBottom: 10, // Reducido de 15
   },
   labelRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 8,
+    marginBottom: 6, // Reducido de 8
   },
   label: {
-    fontSize: 12,
+    fontSize: 11, // Reducido de 12
     fontWeight: '800',
     color: '#1A1A1A',
     letterSpacing: 0.5,
   },
   forgotPassword: {
-    fontSize: 12,
+    fontSize: 11, // Reducido de 12
     fontWeight: '700',
     color: '#A0522D',
   },
   inputWrapper: {
     width: '100%',
-    height: 55,
+    height: 50, // Reducido de 55
     backgroundColor: '#FFFFFF',
-    borderRadius: 15,
+    borderRadius: 12, // Reducido de 15
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 15,
@@ -105,10 +104,10 @@ export const styles = StyleSheet.create({
     opacity: 0.4,
   },
   btnSubmit: {
-    width: '100%',
-    height: 60,
-    backgroundColor: '#954D0D', // Marrón tirando a naranja quemado
-    borderRadius: 20,
+    width: '100%', 
+    height: 55, 
+    backgroundColor: '#954D0D', 
+    borderRadius: 15, // Más cuadrado/moderno como los inputs
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 10,
@@ -120,13 +119,13 @@ export const styles = StyleSheet.create({
   },
   btnSubmitText: {
     color: '#FFFFFF',
-    fontSize: 18,
+    fontSize: 17,
     fontWeight: '800',
   },
   dividerContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginVertical: 25,
+    marginVertical: 20,
     width: '100%',
   },
   dividerLine: {
@@ -135,7 +134,7 @@ export const styles = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0.1)',
   },
   dividerText: {
-    fontSize: 11,
+    fontSize: 10,
     fontWeight: '800',
     color: '#888',
     paddingHorizontal: 15,
@@ -149,7 +148,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 1,
-    borderColor: 'rgba(0,0,0,0.05)',
+    borderColor: 'rgba(0,0,0,0.1)',
   },
   googleIcon: {
     width: 20,
